@@ -12,6 +12,7 @@ function download($url)
         'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,**;q=0.8',
         'Connection: close',
     ]);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
     $result = curl_exec($ch);
     curl_close($ch);
