@@ -120,8 +120,10 @@ foreach ($saved_offers as $id => $offer)
 Описание: {$offer['properties']}
 Дата добавления: {$offer['created']}
 MESSAGE;
-    sendMessage(CHAT_ID, $message);
-    sendPhoto(CHAT_ID, $offer['image'], $offer['title']);
+    foreach (CHAT_IDS as $chat_id) {
+        sendMessage(CHAT_ID, $message);
+        sendPhoto(CHAT_ID, $offer['image'], $offer['title']);
+    }
 }
 
 file_put_contents('offers.json', json_encode($saved_offers, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
