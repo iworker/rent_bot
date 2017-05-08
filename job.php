@@ -101,7 +101,7 @@ foreach ($items as $item) {
 
 foreach ($saved_offers as $id => $offer)
 {
-    if (!$offer['new'])
+    if (!isset($offer['new']))
     {
         continue;
     }
