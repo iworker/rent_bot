@@ -1,2 +1,7 @@
 vendor
+media
+static
 .idea
+settings.php
+output.html
+offers.json
