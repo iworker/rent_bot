@@ -82,7 +82,7 @@ foreach ($items as $item) {
         $props[] = $li->text;
     }
 
-    $properties = implode(',', $props);
+    $properties = implode(', ', $props);
 
     $created_elem = $item->find('.archive');
     $created_at   = $created_elem->text;
@@ -95,6 +95,7 @@ foreach ($items as $item) {
         'price'      => $price,
         'created'    => $created_at,
         'title'      => $title,
+        'link'       => BASE_URL . '/id' . $id,
         'new'        => true,
     ];
 }
@@ -111,18 +112,16 @@ foreach ($saved_offers as $id => $offer)
     unset($saved_offers[$id]['new']);
 
     $message = <<<MESSAGE
+Ссылка на объявление: {$offer['link']}
 {$offer['title']}
 Цена: {$offer['price']} руб.
 {$offer['metro']}
 Адрес: {$offer['address']}
 Описание: {$offer['properties']}
 Дата добавления: {$offer['created']}
-
-{$offer['image']}
-
 MESSAGE;
-
     sendMessage(CHAT_ID, $message);
+    sendPhoto(CHAT_ID, $offer['image'], $offer['title']);
 }
 
 file_put_contents('offers.json', json_encode($saved_offers, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));

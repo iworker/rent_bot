@@ -42,3 +42,28 @@ function sendMessage($chat_id, $message)
     curl_exec($ch);
     curl_close($ch);
 }
+
+function sendPhoto($chat_id, $photo, $caption)
+{
+    $url = 'https://api.telegram.org/bot' . TG_TOKEN . '/sendPhoto';
+
+    $data = json_encode([
+        'chat_id'              => $chat_id,
+        'photo'                => $photo,
+        'disable_notification' => true,
+        'caption'              => $caption,
+    ]);
+
+    $ch = curl_init($url);
+
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'Content-Length: ' . strlen($data),
+    ]);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    curl_exec($ch);
+    curl_close($ch);
+}
