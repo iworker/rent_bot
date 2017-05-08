@@ -1,0 +1,14 @@
+{
+    "name": "iworker/rent_bot",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Ivan Pomortsev",
+            "email": "ivan.pomortsev@gmail.com"
+        }
+    ],
+    "require": {
+        "paquettg/php-html-parser": "^1.7"
+    }
+}
+
