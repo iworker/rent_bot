@@ -106,6 +106,8 @@ foreach ($saved_offers as $id => $offer)
         continue;
     }
 
+    echo 'Sent 1 message' . PHP_EOL;
+
     unset($saved_offers[$id]['new']);
 
     $message = <<<MESSAGE
