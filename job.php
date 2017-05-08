@@ -122,7 +122,7 @@ foreach ($saved_offers as $id => $offer)
 MESSAGE;
     foreach (CHATS_IDS as $chat_id) {
         sendMessage($chat_id, $message);
-        sendPhoto($chat_id, $offer['image'], $offer['title']);
+        // sendPhoto($chat_id, $offer['image'], $offer['title']);
     }
 }
 
