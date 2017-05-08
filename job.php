@@ -100,14 +100,14 @@ foreach ($items as $item) {
     ];
 }
 
+$sent = 0;
+
 foreach ($saved_offers as $id => $offer)
 {
     if (!isset($offer['new']))
     {
         continue;
     }
-
-    echo 'Sent 1 message' . PHP_EOL;
 
     unset($saved_offers[$id]['new']);
 
@@ -124,7 +124,11 @@ MESSAGE;
         sendMessage($chat_id, $message);
         // sendPhoto($chat_id, $offer['image'], $offer['title']);
     }
+
+    ++$sent;
 }
+
+echo "Sent " . (($sent > 0) ? ($sent . ' messages.') : 'no messages.');
 
 file_put_contents('offers.json', json_encode($saved_offers, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 
