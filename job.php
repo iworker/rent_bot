@@ -120,9 +120,9 @@ foreach ($saved_offers as $id => $offer)
 Описание: {$offer['properties']}
 Дата добавления: {$offer['created']}
 MESSAGE;
-    foreach (CHAT_IDS as $chat_id) {
-        sendMessage(CHAT_ID, $message);
-        sendPhoto(CHAT_ID, $offer['image'], $offer['title']);
+    foreach (CHATS_IDS as $chat_id) {
+        sendMessage($chat_id, $message);
+        sendPhoto($chat_id, $offer['image'], $offer['title']);
     }
 }
 
