@@ -84,7 +84,7 @@ foreach ($items as $item) {
 
     $properties = implode(', ', $props);
 
-    $created_elem = $item->find('.archive');
+    $created_elem = $item->find('.date > span');
     $created_at   = $created_elem->text;
 
     $saved_offers[$id] = [
