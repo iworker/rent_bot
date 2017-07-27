@@ -92,6 +92,11 @@ foreach ($items as $item) {
     $created_elem = $item->find('.date > span');
     $created_at   = $created_elem->text;
 
+    if (empty($created_at) || $created_at === ' ') {
+        $created_elem = $item->find('.archive');
+        $created_at   = $created_elem->text;
+    }
+
     $saved_offers[$id] = [
         'image'      => $image,
         'metro'      => $metro,
