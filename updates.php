@@ -45,7 +45,7 @@ while (true) {
                 case UNSUBSCRIBE_COMMAND:
                     $chat_id = $message['chat']['id'];
 
-                    $idx = array_search($chat_id, array_column($users, 'chat_id'));
+                    $idx = array_search($chat_id, $users['users']);
 
                     unset($users['users'][$idx]);
 
