@@ -62,7 +62,7 @@ function sendPhoto($chat_id, $photo, $caption)
         'Content-Type: application/json',
         'Content-Length: ' . strlen($data),
     ]);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
 
     curl_exec($ch);
     curl_close($ch);
