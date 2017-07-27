@@ -6,6 +6,11 @@ require_once('functions.php');
 
 use PHPHtmlParser\Dom;
 
+if (!file_exists('offers.json'))
+{
+    touch('offers.json');
+}
+
 $saved_offers = json_decode(@file_get_contents('offers.json'), true);
 
 if (empty($saved_offers))
@@ -120,7 +125,7 @@ foreach ($saved_offers as $id => $offer)
 Описание: {$offer['properties']}
 Дата добавления: {$offer['created']}
 MESSAGE;
-    foreach (CHATS_IDS as $chat_id) {
+    foreach (getChatsIds() as $chat_id) {
         sendMessage($chat_id, $message);
         // sendPhoto($chat_id, $offer['image'], $offer['title']);
     }

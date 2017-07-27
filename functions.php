@@ -67,3 +67,35 @@ function sendPhoto($chat_id, $photo, $caption)
     curl_exec($ch);
     curl_close($ch);
 }
+
+
+function getUpdates($offset)
+{
+    $data = [
+        'offset'  => $offset + 1,
+        'timeout' => 60,
+    ];
+
+    $url = 'https://api.telegram.org/bot' . TG_TOKEN . '/getUpdates?' . http_build_query($data);
+
+    $ch = curl_init($url);
+
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return $result;
+}
+
+function getChatsIds()
+{
+    $users = json_decode(@file_get_contents('users.json'), true);
+
+    if (isset($users['users']))
+    {
+        return $users['users'];
+    }
+
+    return [];
+}
