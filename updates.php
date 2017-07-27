@@ -5,6 +5,13 @@ require_once('functions.php');
 define('START_COMMAND', '/start');
 define('UNSUBSCRIBE_COMMAND', '/unsubscribe');
 
+$lock = fopen('updates.lock', 'w');
+
+if (!flock($lock, LOCK_EX | LOCK_NB))
+{
+    die;
+}
+
 if (!file_exists('users.json'))
 {
     touch('users.json');
@@ -54,3 +61,5 @@ while (true) {
 
     file_put_contents('users.json', json_encode($users, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 }
+
+flock($lock, LOCK_UN);
