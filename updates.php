@@ -58,6 +58,7 @@ while (true) {
     }
 
     $users['last_update_id'] = $last_update_id;
+    $users['users'] = array_values($users['users']);
 
     file_put_contents('users.json', json_encode($users, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 }
