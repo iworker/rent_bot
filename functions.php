@@ -88,7 +88,7 @@ function getUpdates($offset)
     return $result;
 }
 
-function getChatsIds()
+function getChatsSettings()
 {
     $users = json_decode(@file_get_contents('users.json'), true);
 
