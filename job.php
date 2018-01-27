@@ -38,17 +38,18 @@ foreach ($users as $user_id => $url) {
         $items = $dom->find('.catalog-preview');
 
         foreach ($items as $item) {
-            $link_elem = $item->find('a.title');
-            $id = substr($link_elem->href, 3);
+            $id = $item->getAttribute('data-id');
 
             if (isset($saved_offers[$id])) {
                 continue;
             }
 
-            $link = BASE_URL . $link_elem->href;
-            $title = $link_elem->text;
-            $metro = html_entity_decode($item->find('.metro > a')->text);
-            $address = $item->find('.address')->text;
+            $link_elem = $item->find('.catalog-preview__title');
+
+            $link = BASE_URL . '/id' . $id;
+            $title = trim($link_elem->text);
+            $metro = html_entity_decode($item->find('.catalog-preview__metro > a')->text);
+            $address = $item->find('.catalog-preview__address')->text;
             $images = $item->find('img');
 
             $image = DEFAULT_IMAGE_URL;
@@ -84,7 +85,7 @@ foreach ($users as $user_id => $url) {
                 break;
             }
             //
-            $price_elem = $item->find('.price > strong');
+            $price_elem = $item->find('.catalog-preview__price > strong');
             $price = html_entity_decode($price_elem->text);
             //
             $lis = $item->find('li');
@@ -96,12 +97,19 @@ foreach ($users as $user_id => $url) {
 
             $properties = implode(', ', $props);
 
-            $created_elem = $item->find('.date > span');
-            $created_at = $created_elem->text;
+            foreach (['.catalog-preview__date > span', '.catalog-preview__date > span > span.value', '.archive'] as $created_element_path)
+            {
+                $created_elem = $item->find($created_element_path);
 
-            if (empty($created_at) || $created_at === ' ') {
-                $created_elem = $item->find('.archive');
+                if ($created_elem->count() == 0) {
+                    continue;
+                }
+
                 $created_at = $created_elem->text;
+
+                if (!empty($created_at) && $created_at !== ' ') {
+                    break;
+                }
             }
 
             $saved_offers[$id] = [

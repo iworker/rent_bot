@@ -10,8 +10,10 @@ function download($url)
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36',
         'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,**;q=0.8',
-        'Connection: close',
+        'Accept-Encoding: gzip, deflate',
+        'Connection: keep-alive',
     ]);
+    curl_setopt($ch, CURLOPT_ENCODING , "gzip");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
     $result = curl_exec($ch);
