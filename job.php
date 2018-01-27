@@ -13,6 +13,8 @@ foreach ($users as $user_id => $url) {
 
     $filename = "cache/offers_$hash.json";
 
+    echo 'Caching to: ' . $filename . PHP_EOL;
+
     if (!file_exists($filename)) {
         touch($filename);
     }
