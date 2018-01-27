@@ -150,7 +150,7 @@ MESSAGE;
         ++$sent;
     }
 
-    echo "Sent " . (($sent > 0) ? ($sent . ' messages to user ' . $user_id . '.') : 'no messages.');
+    echo "Sent " . (($sent > 0) ? ($sent . ' messages to user ' . $user_id . '.') : 'no messages.') . PHP_EOL;
 
     file_put_contents($filename, json_encode($saved_offers, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 }
