@@ -128,7 +128,7 @@ foreach ($users as $user_id => $url) {
     $sent = 0;
 
     foreach ($saved_offers as $id => &$offer) {
-        if (in_array($user_id, $offer['sent_to'])) {
+        if (!empty($offer['sent_to']) && in_array($user_id, $offer['sent_to'])) {
             continue;
         }
 
@@ -142,7 +142,7 @@ foreach ($users as $user_id => $url) {
     Дата добавления: {$offer['created']}
 MESSAGE;
 
-        // sendMessage($user_id, $message);
+        sendMessage($user_id, $message);
         // sendPhoto($chat_id, $offer['image'], $offer['title']);
 
         $offer['sent_to'][] = $user_id;
